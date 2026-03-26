@@ -1,0 +1,74 @@
+[package]
+name = "ios-webkit-debug-proxy"
+version = "0.1.0"
+edition = "2024"
+description = "iOS WebKit Debug Proxy - Rust rewrite"
+license = "BSD-3-Clause"
+
+[lib]
+name = "ios_webkit_debug_proxy"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ios_webkit_debug_proxy"
+path = "src/main.rs"
+
+[dependencies]
+# plist parsing (replaces libplist)
+plist = "1"
+
+# UUID generation (replaces custom rpc_new_uuid)
+uuid = { version = "1", features = ["v4"] }
+
+# Regex (replaces pcre/regex.h)
+regex = "1"
+
+# Command-line argument parsing (replaces getopt)
+clap = { version = "4", features = ["derive"] }
+
+# Logging
+log = "0.4"
+env_logger = "0.11"
+
+# Serialization/Deserialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Byte order handling (usbmuxd/WebInspector protocol)
+byteorder = "1"
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+tokio-util = "0.7"
+
+# Async HTTP framework (with WebSocket support)
+axum = { version = "0.8", features = ["ws"] }
+
+# Async TLS (ring backend only)
+tokio-rustls = { version = "0.26", default-features = false, features = ["logging", "ring", "tls12"] }
+
+# HTTP client (for frontend proxy requests)
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls"] }
+
+# Async Stream/Sink utilities
+futures-util = "0.3"
+
+# URL parsing
+url = "2"
+
+# TLS/SSL support (certificate parsing, ring crypto backend, disable default aws-lc-rs)
+rustls = { version = "0.23", default-features = false, features = ["logging", "ring", "std", "tls12"] }
+rustls-pemfile = "2"
+rustls-pki-types = "1"
+
+# Platform-specific dependencies
+[target.'cfg(not(windows))'.dependencies]
+# libimobiledevice bindings - via FFI (Unix: libc for free() etc.)
+libc = "0.2"
+
+[target.'cfg(windows)'.dependencies]
+# Windows socket support
+windows-sys = { version = "0.59", features = ["Win32_Networking_WinSock", "Win32_Foundation", "Win32_System_IO"] }
+
+[build-dependencies]
+pkg-config = "0.3"
