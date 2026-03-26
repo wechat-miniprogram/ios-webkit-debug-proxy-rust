@@ -1,9 +1,10 @@
 [package]
 name = "ios-webkit-debug-proxy"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "iOS WebKit Debug Proxy - Rust rewrite"
-license = "BSD-3-Clause"
+license = "BSD-3-Clause AND MIT"
+repository = "https://github.com/wechat-miniprogram/ios-webkit-debug-proxy-rust"
 
 [lib]
 name = "ios_webkit_debug_proxy"
