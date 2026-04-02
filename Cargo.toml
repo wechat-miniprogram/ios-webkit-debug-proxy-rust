@@ -45,11 +45,11 @@ tokio-util = "0.7"
 # Async HTTP framework (with WebSocket support)
 axum = { version = "0.8", features = ["ws"] }
 
-# Async TLS (ring backend only)
-tokio-rustls = { version = "0.26", default-features = false, features = ["logging", "ring", "tls12"] }
+# Async TLS
+tokio-rustls = "0.26"
 
 # HTTP client (for frontend proxy requests)
-reqwest = { version = "0.12", default-features = false, features = ["rustls-tls"] }
+reqwest = "0.13"
 
 # Async Stream/Sink utilities
 futures-util = "0.3"
@@ -57,8 +57,8 @@ futures-util = "0.3"
 # URL parsing
 url = "2"
 
-# TLS/SSL support (certificate parsing, ring crypto backend, disable default aws-lc-rs)
-rustls = { version = "0.23", default-features = false, features = ["logging", "ring", "std", "tls12"] }
+# TLS/SSL support
+rustls = "0.23"
 rustls-pemfile = "2"
 rustls-pki-types = "1"
 
